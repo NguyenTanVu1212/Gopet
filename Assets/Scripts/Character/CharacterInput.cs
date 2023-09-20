@@ -6,6 +6,7 @@ public class CharacterInput : MonoBehaviour
 {
     public static CharacterInput instance;
     public Vector3 dir = new Vector3();
+    public bool isMove = false;
     private void Awake()
     {
         if(instance!=null)
@@ -13,6 +14,7 @@ public class CharacterInput : MonoBehaviour
             instance = this;
         }
         instance = this;
+        isMove = false;
     }
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,7 @@ public class CharacterInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         dir.x = Input.GetAxis("Horizontal");
         dir.y = Input.GetAxis("Vertical");
         

@@ -12,20 +12,23 @@ public class CharacterMove : MonoBehaviour
     {
         dirMove = Vector3.zero;
         rigidbody = GetComponent<Rigidbody2D>();
-        speedMove = 3f;
+        speedMove = 0.5f;
+        DOTween.SetTweensCapacity(1250,50);
     }
 
     // Update is called once per frame
     void Update()
     {
         dirMove = CharacterInput.instance.dir;
-        rigidbody.MovePosition((dirMove*Time.deltaTime*speedMove) + transform.position);
+        if(dirMove!= Vector3.zero)
+            transform.DOMove(dirMove+transform.position , speedMove).SetEase(Ease.Linear);
         if(Input.GetMouseButtonDown(0))
-        {
-            Debug.Log(Input.mousePosition);
+        {        
             Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePoint.z = 0;
-            transform.DOMove(mousePoint, speedMove*Time.deltaTime);
+            
+            float timeMove = Vector2.Distance(mousePoint , transform.position)*(speedMove);
+            transform.DOMove(mousePoint, timeMove-1).SetEase(Ease.Linear);
         }
     }
     
