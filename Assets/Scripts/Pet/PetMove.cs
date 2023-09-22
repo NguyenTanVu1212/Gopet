@@ -18,7 +18,7 @@ public class PetMove : MonoBehaviour
             character.transform.position = Vector3.zero;
         }
         isMove = false;
-        petMoveSpeed = 5;
+        petMoveSpeed = 2f;
     }
 
     // Update is called once per frame
@@ -36,8 +36,8 @@ public class PetMove : MonoBehaviour
         }
         if (Vector2.Distance(transform.position, character.transform.position) > 4f)
         {
-            petMoveSpeed = petMoveSpeed * 1.456f;
+            petMoveSpeed = petMoveSpeed * 1.4f;
         }
-        else petMoveSpeed = 5;
+        else petMoveSpeed = 2f;
     }
 }

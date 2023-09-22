@@ -17,7 +17,7 @@ public class CharacterMove : MonoBehaviour
     {
         dirMove = Vector3.zero;
         rigidbody = GetComponent<Rigidbody2D>();
-        speedMove = 30f;
+        speedMove = 10f;
         isMoveToTagert = false;
         tagertPoint = Vector3.zero;
 
@@ -30,7 +30,7 @@ public class CharacterMove : MonoBehaviour
         if (dirMove!= Vector3.zero)
         {
             isMoveToTagert = false;
-            rigidbody.MovePosition(transform.position + dirMove * speedMove*Time.deltaTime);
+            rigidbody.MovePosition(transform.position + dirMove * speedMove*Time.fixedDeltaTime);
         }
         if(Input.GetMouseButtonDown(0))
         {
@@ -41,7 +41,7 @@ public class CharacterMove : MonoBehaviour
         if(isMoveToTagert)
         {
             Debug.DrawLine(transform.position, tagertPoint,Color.red,3f);
-            Vector3 dir = Vector3.MoveTowards(this.transform.position , tagertPoint , speedMove*Time.deltaTime);
+            Vector3 dir = Vector3.MoveTowards(this.transform.position , tagertPoint , speedMove*Time.fixedDeltaTime);
             hit2D = Physics2D.Raycast(transform.position , dir , 0.1f , layer);
             if (hit2D.collider == null)
                 rigidbody.MovePosition(dir);
