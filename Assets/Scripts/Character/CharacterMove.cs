@@ -7,7 +7,8 @@ public class CharacterMove : MonoBehaviour
 {
     [SerializeField] Vector3 dirMove = new Vector3();
     [SerializeField] float speedMove;
-    Rigidbody2D rigidbody = new Rigidbody2D();
+    [SerializeField] Transform legPoint;
+    Rigidbody2D rigidbody ;
     [SerializeReference]
     bool isMoveToTagert = false;
     Vector3 tagertPoint = new Vector3();
@@ -40,9 +41,9 @@ public class CharacterMove : MonoBehaviour
         }
         if(isMoveToTagert)
         {
-            Debug.DrawLine(transform.position, tagertPoint,Color.red,3f);
+            Debug.DrawLine(legPoint.position, tagertPoint,Color.red,3f);
             Vector3 dir = Vector3.MoveTowards(this.transform.position , tagertPoint , speedMove*Time.fixedDeltaTime);
-            hit2D = Physics2D.Raycast(transform.position , dir , 0.1f , layer);
+            hit2D = Physics2D.Raycast(legPoint.position , dir , 0.1f , layer);
             if (hit2D.collider == null)
                 rigidbody.MovePosition(dir);
             else isMoveToTagert = false;
